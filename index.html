@@ -363,6 +363,7 @@
             class="price"
             type="number"
             placeholder="Price"
+            min="1"
           />
         </div>
 
@@ -543,6 +544,12 @@
 
           setTimeout(() => {
             remaining.style.border = "1px solid transparent";
+          }, 2000);
+        } else if (price.value < 1) {
+          price.style.border = "1px solid red";
+
+          setTimeout(() => {
+            price.style.border = "1px solid transparent";
           }, 2000);
         } else {
           return true;
