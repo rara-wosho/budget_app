@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+    :root {
+      --blackfont: rgba(45, 60, 45, 1);
+      --grayfont: rgba(90, 90, 90, 1);
+      --fontcolor: rgba(110, 140, 190, 1);
+      --danger: rgba(240, 10, 10, 1);
+      --border: 1px solid transparent;
+      --shadow-big: 0 4px 10px rgba(70, 140, 140, 0.2);
+      --shadow-small: 0 3px 5px rgba(60, 150, 150, 0.3);
+
+      --buttoncolor: linear-gradient(
+        145deg,
+        rgba(140, 210, 240, 1) 0%,
+        rgba(160, 170, 230, 1) 100%
+      );
+
+      --primary: linear-gradient(
+        145deg,
+        rgba(200, 250, 255, 1) 0%,
+        rgba(180, 240, 255, 1) 100%
+      );
+
+      --darkprimary: linear-gradient(
+        145deg,
+        rgba(140, 240, 240, 1) 0%,
+        rgba(180, 200, 230, 1) 100%
+      );
+
+      --inputColor: linear-gradient(
+        160deg,
+        rgba(250, 255, 255, 1) 0%,
+        rgba(220, 250, 250, 1) 100%
+      );
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      border-radius: 0;
+      color: rgba(50, 40, 40, 1);
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      width: 100%;
+      height: 100vh;
+      padding: 0px;
+      display: grid;
+      place-items: center;
+      background-color: var(--darkprimary);
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+      /* height: 100vh; */
+      padding: 15px;
+      border: 0px solid red;
+      border-radius: 0;
+      position: relative;
+      background: var(--darkprimary);
+      overflow: auto;
+      transition: background-color 0.5s, color 0.5s;
+      border-radius: 10px;
+    }
+
+    .container .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .title h2 {
+      color: var(--blackfont);
+    }
+
+    body.dark-mode {
+      --blackfont: rgba(210, 210, 210, 1);
+      --grayfont: rgba(160, 160, 160, 1);
+      --danger: #ff4d4d;
+      --fontcolor: rgba(5, 162, 235, 1);
+      --border: 1px solid rgba(5, 162, 235, 0.6);
+      --shadow-big: 0 4px 5px rgba(0, 0, 0, 0.1);
+      --shadow-small: 0 3px 7px rgba(30, 30, 30, 0.2);
+
+      --buttoncolor: linear-gradient(
+        145deg,
+        rgba(5, 162, 235, 0.6) 0%,
+        rgba(5, 104, 150, 1) 100%
+      );
+
+      --primary: linear-gradient(
+        145deg,
+        rgba(50, 80, 100, 1) 0%,
+        rgba(60, 85, 100, 1) 50%,
+        rgba(40, 60, 80, 1) 100%
+      );
+
+      --darkprimary: linear-gradient(
+        145deg,
+        rgba(30, 50, 70, 1) 0%,
+        rgba(20, 40, 60, 1) 100%
+      );
+
+      --inputColor: linear-gradient(
+        145deg,
+        rgba(9, 71, 106, 0.5) 0%,
+        rgba(8, 79, 133, 0.5) 100%
+      );
+    }
+
+    .heading {
+      border-radius: 8px;
+      margin-bottom: 15px;
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      justify-content: center;
+      padding: 15px 10px;
+      align-items: center;
+      gap: 5px;
+      background: var(--primary);
+      box-shadow: var(--shadow-big);
+    }
+
+    .heading div label {
+      font-size: 0.8rem;
+      color: var(--blackfont);
+    }
+
+    .heading input,
+    .item-to-add input {
+      width: 100%;
+      padding: 10px 10px;
+      margin-top: 7px;
+      border-radius: 8px;
+      background: var(--inputColor);
+      border: var(--border);
+      outline: none;
+      color: var(--blackfont);
+
+      box-shadow: var(--shadow-small);
+      font-size: 1rem;
+    }
+
+    .item-to-add {
+      display: flex;
+      gap: 5px;
+    }
+
+    .item-to-add input[type="text"] {
+      width: 70%;
+    }
+
+    .item-to-add input[type="number"] {
+      width: 30%;
+    }
+
+    .add-item-box,
+    .list-box {
+      padding: 15px 10px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: var(--shadow-big);
+      background: var(--primary);
+    }
+
+    .add-item-box label,
+    .list-box label {
+      color: var(--grayfont);
+      width: 100%;
+      display: inline-block;
+      text-align: start;
+    }
+
+    .add-item-box button {
+      width: 100%;
+      padding: 10px 0;
+      margin-top: 13px;
+      border-radius: 10px;
+      background: var(--buttoncolor);
+      box-shadow: 0 3px 5px rgba(60, 140, 140, 0.3);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--blackfont);
+      border: var(--border);
+    }
+
+    .list-box,
+    table {
+      width: 100%;
+    }
+
+    .list-box tr i {
+      width: 45%;
+      padding: 4px;
+      margin-right: 3px;
+      border-radius: 7px;
+      background: transparent;
+      font-size: 1.2rem;
+      color: var(--blackfont);
+    }
+
+    .list-box tr .delete {
+      color: var(--danger);
+    }
+
+    .list-box tr td input {
+      font-size: 0.9rem;
+      border: none;
+      width: 100%;
+      background: transparent;
+      text-align: center;
+    }
+
+    th,
+    td,
+    tr td input {
+      text-align: center;
+      width: calc(100% / 3);
+      padding: 5px 0;
+      color: var(--blackfont);
+    }
+
+    tr td input {
+      color: var(--blackfont);
+    }
+
+    .container .title {
+      padding: 10px 0;
+    }
+
+    .title span {
+      text-transform: uppercase;
+      color: var(--fontcolor);
+      display: inline-block;
+      font-weight: 900;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 45px;
+      height: 20px;
+      --light: rgba(200, 250, 255, 1);
+      --dark: rgba(140, 170, 230, 1);
+      --link: rgb(27, 129, 112);
+      --link-hover: rgb(24, 94, 82);
+    }
+
+    .switch-label {
+      right: 10px;
+      position: absolute;
+      width: 100%;
+      height: 22px;
+      background-color: var(--dark);
+      border-radius: 25px;
+      cursor: pointer;
+      border: 1px solid var(--dark);
+    }
+
+    .checkbox {
+      position: absolute;
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 25px;
+      -webkit-transition: 0.3s;
+      transition: 0.3s;
+    }
+
+    .checkbox:checked ~ .slider {
+      background-color: rgba(5, 162, 235, 1);
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 17px;
+      height: 16px;
+      border-radius: 50%;
+      -webkit-box-shadow: 0px 0px 3px 0px var(--light);
+      box-shadow: 0px 0px 3px 0px var(--light);
+      background-color: var(--light);
+      -webkit-transition: 0.3s;
+      transition: 0.3s;
+    }
+
+    .checkbox:checked ~ .slider::before {
+      -webkit-transform: translateX(21px);
+      -ms-transform: translateX(21px);
+      transform: translateX(21px);
+      background-color: rgba(5, 162, 235, 0);
+
+      -webkit-box-shadow: inset - 5px -5px 0px 0px var(--light);
+      box-shadow: inset 5px -5px 0px 0px var(--light);
+
+      width: 17px;
+      height: 17px;
+      top: 1px;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="title">
+        <h2><span>Expense</span> Tracker</h2>
+
+        <div class="toggle-switch">
+          <label class="switch-label">
+            <input type="checkbox" class="checkbox" id="toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="heading">
+        <div>
+          <label>My money</label>
+          <input value="0" class="money" type="text" placeholder="" />
+        </div>
+
+        <div>
+          <label>Remaining</label>
+          <input class="remaining" type="text" placeholder="" readonly />
+        </div>
+
+        <div>
+          <label>Total expenses</label>
+          <input class="expenses" type="text" placeholder="" readonly />
+        </div>
+      </div>
+
+      <div class="add-item-box">
+        <label>Add item here</label>
+        <div class="item-to-add">
+          <input class="description" type="text" placeholder="Description" />
+          <input
+            oninput="display(this.value)"
+            class="price"
+            type="number"
+            placeholder="Price"
+          />
+        </div>
+
+        <button class="add-btn">Add to List</button>
+      </div>
+
+      <div class="list-box">
+        <label>Item List</label>
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Prices</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      const money = document.querySelector(".money");
+      const remaining = document.querySelector(".remaining");
+      const expenses = document.querySelector(".expenses");
+
+      let items;
+
+      window.addEventListener("load", () => {
+        items = fromStorage();
+        display(0);
+
+        document.addEventListener("click", (event) => {
+          const target = event.target;
+          if (target.classList.contains("edit")) {
+            const input = target.closest("tr").querySelector(".list-desc");
+            const inputPrice = target
+              .closest("tr")
+              .querySelector(".list-price");
+
+            input.removeAttribute("readonly");
+            inputPrice.removeAttribute("readonly");
+            inputPrice.focus();
+            input.addEventListener("focusout", (e) => {
+              setTimeout(() => {
+                input.setAttribute("readonly", true);
+                const index = Array.from(
+                  target.closest("tbody").querySelectorAll(".edit")
+                ).indexOf(target);
+                items[index].description = e.target.value;
+                localStorage.setItem("items-list", JSON.stringify(items));
+                display(0);
+              }, 100);
+            });
+
+            inputPrice.addEventListener("focusout", (e) => {
+              setTimeout(() => {
+                inputPrice.setAttribute("readonly", true);
+                const index = Array.from(
+                  target.closest("tbody").querySelectorAll(".edit")
+                ).indexOf(target);
+                items[index].price = e.target.value;
+                localStorage.setItem("items-list", JSON.stringify(items));
+                display(0);
+              }, 100);
+            });
+          } else if (target.classList.contains("delete")) {
+            const cnfrm = confirm("Do you want to remove this item?");
+
+            const index = Array.from(
+              target.closest("tbody").querySelectorAll(".delete")
+            ).indexOf(target);
+
+            if (cnfrm) {
+              items = items.filter((d) => d != items[index]);
+              localStorage.setItem("items-list", JSON.stringify(items));
+              display(0);
+            }
+          }
+        });
+
+        document.querySelector(".add-btn").addEventListener("click", () => {
+          if (validateInput()) {
+            toStorage();
+            display(0);
+          }
+        });
+
+        money.addEventListener("change", () => {
+          localStorage.setItem("money", JSON.stringify(money.value));
+          display(0);
+        });
+      });
+
+      function fromStorage() {
+        return JSON.parse(localStorage.getItem("items-list")) || [];
+      }
+
+      function toStorage() {
+        const desc = document.querySelector(".description");
+        const price = document.querySelector(".price");
+
+        let itemToAdd = {
+          description: desc.value,
+          price: price.value,
+        };
+
+        items.push(itemToAdd);
+
+        localStorage.setItem("items-list", JSON.stringify(items));
+
+        desc.value = "";
+        price.value = "";
+      }
+
+      function display(num) {
+        money.value = JSON.parse(localStorage.getItem("money")) || 0;
+
+        const tbody = document.querySelector("tbody");
+
+        const listBox = document.querySelector(".list-box");
+
+        let a = "";
+        let total = 0;
+
+        if (items.length <= 0) {
+          tbody.innerHTML = '<td colspan="3">Your list is empty</td>';
+        } else {
+          items.forEach((item) => {
+            a += `<tr>
+			<td><input class="list-desc" readonly type="text" value="${item.description}"></td>
+			<td><input class="list-price" value="${item.price}" readonly type="text"></td>
+			<td><i class="edit fa-regular fa-pen-to-square"></i><i class="delete fa-regular fa-trash-can"></i></td>			
+			</tr>`;
+            total += Number(item.price);
+          });
+          tbody.innerHTML = a;
+        }
+        let ex = Number(total) + Number(num);
+        expenses.value = ex < 1 ? 0 : ex;
+        let re = money.value - expenses.value;
+        remaining.value = re < 1 ? 0 : re;
+      }
+
+      function validateInput() {
+        const money = document.querySelector(".money");
+        const desc = document.querySelector(".description");
+        const price = document.querySelector(".price");
+        const remaining = document.querySelector(".remaining");
+
+        if (!desc.value && !price.value) {
+          desc.style.border = "1px solid red";
+          price.style.border = "1px solid red";
+
+          setTimeout(() => {
+            desc.style.border = "1px solid transparent";
+            price.style.border = "1px solid transparent";
+          }, 2000);
+        } else if (!desc.value) {
+          desc.style.border = "1px solid red";
+          setTimeout(() => {
+            desc.style.border = "1px solid transparent";
+          }, 2000);
+        } else if (!price.value) {
+          price.style.border = "1px solid red";
+
+          setTimeout(() => {
+            price.style.border = "1px solid transparent";
+          }, 2000);
+        } else if (!money.value || money.value == 0) {
+          money.style.border = "1px solid red";
+
+          setTimeout(() => {
+            money.style.border = "1px solid transparent";
+          }, 2000);
+        } else if (!remaining.value || remaining.value == 0) {
+          remaining.style.border = "1px solid red";
+
+          setTimeout(() => {
+            remaining.style.border = "1px solid transparent";
+          }, 2000);
+        } else {
+          return true;
+        }
+      }
+
+      const toggle = document.getElementById("toggle");
+      const body = document.body;
+
+      toggle.addEventListener("change", function () {
+        if (toggle.checked) {
+          body.classList.add("dark-mode");
+        } else {
+          body.classList.remove("dark-mode");
+        }
+      });
+    </script>
+  </body>
+</html>
