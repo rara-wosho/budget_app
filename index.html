@@ -322,6 +322,25 @@
       height: 17px;
       top: 1px;
     }
+
+    .text-start {
+      padding-block: 3rem;
+      color: var(--grayfont);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+      }
+
+      .container {
+        border-radius: 0;
+        height: 100dvh;
+        width: 100vw;
+      }
+    }
   </style>
 
   <body>
@@ -490,7 +509,8 @@
         let total = 0;
 
         if (items.length <= 0) {
-          tbody.innerHTML = '<td colspan="3">Your list is empty</td>';
+          tbody.innerHTML =
+            '<td class="text-start" colspan="3">Your list is empty</td>';
         } else {
           items.forEach((item) => {
             a += `<tr>
